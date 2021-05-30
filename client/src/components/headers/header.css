@@ -1,0 +1,49 @@
+header{
+    min-height: 70px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #51E2F5;
+}
+header .logo{
+    padding: 9px 7px 2px 5px;
+    flex: 1;
+}
+header .logoname{
+    display: inline-block;
+    margin-left: 20px;
+    padding: 2px 5px;
+}
+header a{
+    text-transform: uppercase;
+    color: #555;
+}
+header ul li{
+    display: inline-block;
+    opacity: 0.7;
+    padding: 0 20px;
+}
+header ul li:hover{
+    opacity: 1;
+}
+.menu{
+    display: none;
+}
+.chat-icon{
+    position: relative;
+    margin-right: 20px;
+}
+.chat-icon span{
+    background: crimson;
+    border-radius: 20px;
+    color: white;
+    position: absolute;
+    top:-10px;
+    right: -10px;
+    padding: 5px 7px;
+    font-size: 10px;
+}
