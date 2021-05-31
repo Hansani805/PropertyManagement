@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Grid, Paper, } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 
-
-const Details = (props) => {
+const Details = ({ pRate, oRate, ...rest }) => {
   return (
     <div style={{ padding: 14 }} className="App">
       <h1>Details</h1>
@@ -15,7 +14,6 @@ const Details = (props) => {
             <ul>
               {/* <li>3 bed rooms</li>
               <li>Wi-Fi</li> */}
-              
             </ul>
           </Grid>
           <Grid item container>
@@ -23,28 +21,22 @@ const Details = (props) => {
               <ul style={{ "list-style-type": "none" }}>
                 <li>Property Ratings</li>
                 <li>
-                  <Rating name="property" size="medium" value={5} />{" "}
-                  {props.pRate.five}
+                  <Rating name="property" size="medium" value={5} /> {pRate[5]}
                 </li>
                 <li>
-                  <Rating name="property" size="medium" value={4} />{" "}
-                  {props.pRate.four}
+                  <Rating name="property" size="medium" value={4} /> {pRate[4]}
                 </li>
                 <li>
-                  <Rating name="property" size="medium" value={3} />{" "}
-                  {props.pRate.three}
+                  <Rating name="property" size="medium" value={3} /> {pRate[3]}
                 </li>
                 <li>
-                  <Rating name="property" size="medium" value={2} />{" "}
-                  {props.pRate.two}
+                  <Rating name="property" size="medium" value={2} /> {pRate[2]}
                 </li>
                 <li>
-                  <Rating name="property" size="medium" value={1} />{" "}
-                  {props.pRate.one}
+                  <Rating name="property" size="medium" value={1} /> {pRate[1]}
                 </li>
                 <li>
-                  <Rating name="property" size="medium" value={0} />{" "}
-                  {props.pRate.zero}
+                  <Rating name="property" size="medium" value={0} /> {pRate[0]}
                 </li>
               </ul>
             </Grid>
@@ -52,33 +44,25 @@ const Details = (props) => {
               <ul style={{ "list-style-type": "none" }}>
                 <li>Owner Ratings</li>
                 <li>
-                  <Rating name="owner" size="medium" value={5} />{" "}
-                  {props.oRate.five}
+                  <Rating name="owner" size="medium" value={5} /> {oRate[5]}
                 </li>
                 <li>
-                  <Rating name="owner" size="medium" value={4} />{" "}
-                  {props.oRate.four}
+                  <Rating name="owner" size="medium" value={4} /> {oRate[4]}
                 </li>
                 <li>
-                  <Rating name="owner" size="medium" value={3} />{" "}
-                  {props.oRate.three}
+                  <Rating name="owner" size="medium" value={3} /> {oRate[3]}
                 </li>
                 <li>
-                  <Rating name="owner" size="medium" value={2} />{" "}
-                  {props.oRate.two}
+                  <Rating name="owner" size="medium" value={2} /> {oRate[2]}
                 </li>
                 <li>
-                  <Rating name="owner" size="medium" value={1} />{" "}
-                  {props.oRate.one}
+                  <Rating name="owner" size="medium" value={1} /> {oRate[1]}
                 </li>
                 <li>
-                  <Rating name="owner" size="medium" value={0} />{" "}
-                  {props.oRate.zero}
+                  <Rating name="owner" size="medium" value={0} /> {oRate[0]}
                 </li>
               </ul>
               <button>payment</button>
-
-              
             </Grid>
           </Grid>
         </Grid>

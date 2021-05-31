@@ -1,4 +1,5 @@
 const Comment = require("../models/comment");
+const Product = require("../models/productModel");
 
 exports.addProperty = (req, res, next) => {
   const name = req.body.name;
@@ -45,7 +46,7 @@ exports.addProperty = (req, res, next) => {
 
 exports.getAllProperties = async (req, res, next) => {
   try {
-    const properties = await Comment.find({});
+    const properties = await Product.find({});
     console.log(properties);
     res.status(200).json({
       data: properties,
@@ -59,10 +60,11 @@ exports.getAllProperties = async (req, res, next) => {
 };
 
 exports.getProperty = async (req, res, next) => {
+  console.log("hereeeeeee");
   console.log(req.params.id);
   const id = req.params.id;
   try {
-    const property = await Comment.findById(id);
+    const property = await Product.findById(id);
     console.log(property);
     res.status(200).json({
       data: property,
