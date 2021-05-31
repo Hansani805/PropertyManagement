@@ -48,7 +48,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/property/")
+      .get("/api/property")
       .then((response) => {
         console.log(response.data.data);
         setPropertyData(response.data.data);

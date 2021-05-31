@@ -1,15 +1,17 @@
 import React, { useState} from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import './PaymentModal.css';
+import isEmail from "validator/lib/isEmail";
 import axios from '../mainpages/utils/axios'//"./components/mainpages/utils/axios.js";
+//import DetailProduct from '../mainpages/detailProduct/DetailProduct';
 
 const PaymentModal = () => {
   const [paymentData, setPaymentData] = useState({
     sandbox: true,
     merchant_id: '1216780',
-    return_url: 'http://localhost:3001/return',
-    cancel_url: 'http://localhost:3001/cancel',
-    notify_url: 'http://localhost:3001/notify',
+    return_url: 'http://localhost:3000/return',
+    cancel_url: 'http://localhost:3000/cancel',
+    notify_url: 'http://localhost:3000/notify',
     order_id: '',
     items: '',
     amount: '',
@@ -38,7 +40,7 @@ const PaymentModal = () => {
     console.log("Payment completed. OrderID:" + orderId);
     
     axios
-        .post('/payment', {
+        .post('/api/payment', {
           first_name:paymentData.first_name,
           last_name:paymentData.last_name,
           address:paymentData.address,
@@ -53,6 +55,7 @@ const PaymentModal = () => {
 
         })
         .then((response) => {
+          console.log("response called")
           console.log(response);
           // setReplyData(prev => [...prev, {user: "W008-Aruna Perera", text: reply}]);
           // setReplyState(false);
@@ -84,6 +87,8 @@ const PaymentModal = () => {
       setError('First name and last name should be provided.');
     } else if (paymentData.address === '') {
       setError('Address should be provided.');
+    // }else if (!isEmail(email)){
+    //   setError('Invalid Email');
     } else if (paymentData.phone === '') {
       setError('Phone number should be provided.');
     } else if (paymentData.order_id === '') {
@@ -266,10 +271,12 @@ const PaymentModal = () => {
 
           <div className="orderid">
           <label htmlFor="orderid">
+          {/* {detailProduct.price} */}
             Property ID :
           </label>
           
             <input
+            
               type="orderid"
               placeholder="Order ID"
               id="orderid" name="order_id"

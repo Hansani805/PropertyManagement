@@ -1,4 +1,4 @@
-const Payment = require('../models/paymentModel')
+const Payment = require('../models/paymentModal')
 // const Category = require('../models/categoryModel')
 // const Products = require('../models/productModel')
 
@@ -10,6 +10,7 @@ exports.savePayment = function(req,res){
             return res.json({status:false,data:'Payment error'});
         }
         
-        return res.json({status:false,data:payment});
+        return res.json({status:true,data:payment});
     })
 }
+

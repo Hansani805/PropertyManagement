@@ -19,7 +19,7 @@ const Comment = (props) => {
   useEffect(() => {
     if(replyState)
       axios
-        .post('/comment/reply', {pId: pId, commentId: commentId, reply: {user: "W008-Aruna Perera", text: reply}})
+        .post('/api/comment/reply', {pId: pId, commentId: commentId, reply: {user: "W008-Aruna Perera", text: reply}})
         .then((response) => {
           console.log(response);
           setReplyData(prev => [...prev, {user: "W008-Aruna Perera", text: reply}]);
@@ -99,13 +99,13 @@ const Comment = (props) => {
                 <IconButton
                   onClick={() =>
                     axios
-                      .delete("/comment/", {
+                      .delete("/api/comment/", {
                         data: { pId: pId, commentId: commentId },
                       })
                       .then((response) => {
                         console.log(response);
                         axios
-                          .get(`/property/${pId}`)
+                          .get(`/api/property/${pId}`)
                           .then((response) => {
                             console.log(response);
                             dat(prev => !prev);

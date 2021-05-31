@@ -4,10 +4,10 @@ const router = express.Router();
 
 const commentController = require("../controllers/comment");
 
-router.post("/", commentController.addComment);
+router.post("/comment", commentController.addComment);
 
-router.delete("/", commentController.deleteComment);
+router.delete("/comment", commentController.deleteComment);
 
-router.post("/reply", commentController.addReply);
+router.post("/comment/reply", commentController.addReply);
 
 module.exports = router;

@@ -4,10 +4,12 @@ const router = express.Router();
 
 const propertyController = require("../controllers/property");
 
-router.post("/", propertyController.addProperty);
+router.post("/property", propertyController.addProperty);
 
-router.get("/", propertyController.getAllProperties);
+router.get("/property", propertyController.getAllProperties);
 
-router.get("/:id", propertyController.getProperty);
+router.get("/property/:id", propertyController.getProperty);
+
+
 
 module.exports = router;

@@ -74,3 +74,9 @@ exports.getProperty = async (req, res, next) => {
     next(error);
   }
 };
+
+// exports.getTest = function(req,res){
+//   console.log("test get")
+//   console.log(req.body)
+//   return res.json({status:true,data:'test'})
+// }

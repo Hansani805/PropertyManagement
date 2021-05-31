@@ -156,7 +156,7 @@ const PropertyDetails = () => {
   useEffect(() => {
     if (location.state) {
       axios
-        .get(`/property/${location.state._id}`)
+        .get(`/api/property/${location.state._id}`)
         .then((response) => {
           console.log(response);
           setData(response.data.data);
@@ -179,7 +179,7 @@ const PropertyDetails = () => {
     var guestName="Smanthika";
     var guestId = "G008";
     axios
-      .post("/comment/", {
+      .post("/api/comment/", {
         pId: data._id,
         gId: guestId,
         gname: guestName,
@@ -199,7 +199,7 @@ const PropertyDetails = () => {
         setORating(3);
         setCommentText("");
         axios
-          .get(`/property/${location.state._id}`)
+          .get(`/api/property/${location.state._id}`)
           .then((response) => {
             console.log(response);
             setData(response.data.data);
@@ -216,7 +216,7 @@ const PropertyDetails = () => {
 
   return loding ? (
     <CircularProgress
-      size={100}
+      size={50}
       style={{ marginLeft: "48%", marginTop: "20%" }}
     />
   ) : (
