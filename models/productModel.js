@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema(
   {
-    id: {
-      type: mongoose.Schema.ObjectId,
-      unique: true,
-      trim: true,
-      required: true,
-    },
+    // id: {
+    //   type: mongoose.Schema.ObjectId,
+    //   unique: true,
+    //   trim: true,
+    //   required: true,
+    // },
     product_id: {
       type: String,
       unique: true,

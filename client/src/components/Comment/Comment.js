@@ -9,15 +9,15 @@ import TextField from "@material-ui/core/TextField";
 import axios from "../../components/mainpages/utils/axios";
 
 const Comment = (props) => {
-  const { user, rate, replies, text, pId, commentId, dat } = props;
-  const [replyData, setReplyData] = useState(replies);
+  const { user, rate, text, pId, commentId, dat } = props;
+  const [replyData, setReplyData] = useState([]);
   const [reply, setReply] = useState("");
   const [replyState, setReplyState] = useState(false);
 
   const saveReply = async () => {
     axios
-      .put("/api/comment", {
-        _id: commentId,
+      .post("/api/reply", {
+        commentId,
         name: "W008-Aruna Perera",
         reply: reply,
       })
@@ -31,12 +31,12 @@ const Comment = (props) => {
   const getReplies = async () => {
     console.log("*******************************");
     console.log(commentId);
-    axios.get(`/api/comment/g/${commentId}`).then((res) => {
+    axios.get(`/api/reply/${commentId}`).then((res) => {
       console.log(res);
-      if (res && res.data && res.data.comment) {
+      if (res && res.data && res.data.replies) {
         console.log("-----++++++++++++----------");
-        console.log(res.data.comment[0].replies);
-        setReplyData(res.data.comment[0].replies);
+
+        setReplyData(res.data.replies);
       }
     });
   };

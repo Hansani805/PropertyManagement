@@ -14,7 +14,7 @@ const commentSchma = new Schema(
 
     gId: { type: String, require: true },
     gName: { type: String, require: true },
-    replies: [{ name: { type: String }, reply: { type: String } }],
+    // replies: [{ name: { type: String }, reply: { type: String } }],
 
     product_id: {
       type: String,

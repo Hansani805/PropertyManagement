@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PropertyDetails = (props) => {
-  const { product_id } = useParams();
   const classes = useStyles();
   const location = useLocation();
   const [load, setLoad] = useState(false);
@@ -151,6 +150,7 @@ const PropertyDetails = (props) => {
   const [oRating, setORating] = useState(3);
   const [commentText, setCommentText] = useState("");
   const [ratings, setRatings] = useState({ p_rating: [], o_rating: [] });
+
   useEffect(() => {
     if (location.state) {
       console.log("got hte product id");
@@ -171,7 +171,7 @@ const PropertyDetails = (props) => {
     } else {
       console.log("no product id");
     }
-  }, [location.state, load]);
+  }, []);
 
   // const AfterDeleteHandler = (data) => {
   //   useEffect(() => {
@@ -180,8 +180,7 @@ const PropertyDetails = (props) => {
   // }
 
   const commentSection = () => {
-    console.log("heeey");
-    if (data && data.comments) {
+    if (data && data.comments && data.comments.length > 0) {
       console.log(data.comments);
     }
     return data && data.comments ? (
@@ -216,81 +215,29 @@ const PropertyDetails = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const addCommentSection = () => (
-    <div style={{ backgroundColor: "#EDF7F6", padding: "10px" }}>
-      <Grid container spacing={2} justify="center">
-        <Grid item xs={12} container>
-          <Grid item xs={3}>
-            <Typography>Property Rating:</Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Rating
-              name="simple-controlled"
-              size="large"
-              value={pRating}
-              onChange={(event, newValue) => {
-                console.log(event, newValue);
-                setPRating(newValue);
-              }}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <Typography>Owner Rating:</Typography>
-          </Grid>
-          <Grid item xs={3}>
-            <Rating
-              name="simple-controlledd"
-              size="large"
-              value={oRating}
-              onChange={(event, newValue) => {
-                console.log(event, newValue);
-                setORating(newValue);
-              }}
-            />
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            multiline
-            rows={3}
-            size="small"
-            id="comment"
-            label="Comments..."
-            name="comment"
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-          />
-        </Grid>
-      </Grid>
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={() => submitHandler()}
-      >
-        Submit
-      </Button>
-    </div>
-  );
+  // const addCommentSection = () => (
 
-  const submitHandler = () => {
+  // );
+
+  const submitHandler = (e) => {
+    e.preventDefault();
     var guestName = "Smanthika";
     var guestId = "G008";
+
+    const comment = {
+      gId: guestId,
+      gName: guestName,
+      // email: email,
+      // tp: tpNo,
+      pRating: pRating,
+      oRating: oRating,
+      comment: commentText,
+      product_id: location.state.product_id,
+    };
+    console.log("savingggggggg");
+    console.log(comment);
     axios
-      .post("/api/comment/", {
-        gId: guestId,
-        gname: guestName,
-        // email: email,
-        // tp: tpNo,
-        pRating: pRating,
-        oRating: oRating,
-        comment: commentText,
-        product_id: location.state.product_id,
-      })
+      .post("/api/comment/", comment)
       .then((response) => {
         console.log(response);
         // setGuestId("");
@@ -301,10 +248,13 @@ const PropertyDetails = (props) => {
         setORating(3);
         setCommentText("");
         axios
-          .get(`/api/property/${location.state._id}`)
-          .then((response) => {
+          .get(`/api/comment/${location.state.product_id}`)
+          .then(async (response) => {
             console.log(response);
-            setData(response.data.data);
+            if (response.data) {
+              setData(response.data);
+            }
+            await getStats();
             setLoading(false);
           })
           .catch((err) => console.log(err));
@@ -340,8 +290,66 @@ const PropertyDetails = (props) => {
 
           <Paper style={{ padding: "40px 20px", width: "1360px" }}>
             {/* comment section */}
-            {commentSection()}
-            {addCommentSection()}
+            <div> {commentSection()}</div>
+            <div style={{ backgroundColor: "#EDF7F6", padding: "10px" }}>
+              <form onSubmit={submitHandler}>
+                <Grid container spacing={2} justify="center">
+                  <Grid item xs={12} container>
+                    <Grid item xs={3}>
+                      <Typography>Property Rating:</Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Rating
+                        name="simple-controlled"
+                        size="large"
+                        value={pRating}
+                        onChange={(event, newValue) => {
+                          console.log(event, newValue);
+                          setPRating(newValue);
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Typography>Owner Rating:</Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Rating
+                        name="simple-controlledd"
+                        size="large"
+                        value={oRating}
+                        onChange={(event, newValue) => {
+                          console.log(event, newValue);
+                          setORating(newValue);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      multiline
+                      rows={3}
+                      size="small"
+                      id="comment"
+                      label="Comments..."
+                      name="comment"
+                      value={commentText}
+                      onChange={(e) => setCommentText(e.target.value)}
+                    ></TextField>
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  Submit
+                </Button>
+              </form>
+            </div>
           </Paper>
         </div>
         {/* <Grid>
