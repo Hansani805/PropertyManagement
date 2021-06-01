@@ -27,16 +27,17 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-  },
+  // form: {
+  //   width: "100%",
+  //   marginTop: theme.spacing(3),
+  // },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  
   root: {
     display: "flex",
-    backgroundColor: "#A28089",
+    // backgroundColor: "#A28089",
     flexWrap: "wrap",
     "& > *": {
       marginTop: theme.spacing(2),
@@ -44,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(5),
     },
   },
+  
+
   media: {
     height: 500,
   },
@@ -55,92 +58,6 @@ const PropertyDetails = (props) => {
   const [load, setLoad] = useState(false);
   const [data, setData] = useState();
 
-  // {
-  // _id: {
-  //   $oid: "603b42dfbfcd3d4998d64a19",
-  // },
-  // pRatings: {
-  //   zero: 0,
-  //   one: 0,
-  //   two: 0,
-  //   three: 3,
-  //   four: 0,
-  //   five: 3,
-  // },
-  // oRatings: {
-  //   zero: 0,
-  //   one: 0,
-  //   two: 0,
-  //   three: 4,
-  //   four: 2,
-  //   five: 0,
-  // },
-  // rating: 3.8,
-  // details: [],
-  // name: "check updatessss",
-  // price: 1500,
-  // comments: [
-  //   {
-  //     pRating: 5,
-  //     oRating: 3,
-  //     _id: {
-  //       $oid: "603cc1364f5f9b3ce01a340c",
-  //     },
-  //     gId: "1",
-  //     gName: "guest",
-  //     email: "test@test.com",
-  //     tp: 771234567,
-  //     text: "this is test",
-  //     replies: [],
-  //   },
-  //   {
-  //     pRating: 3,
-  //     oRating: 4,
-  //     _id: {
-  //       $oid: "603cc1934f5f9b3ce01a340d",
-  //     },
-  //     gId: "222",
-  //     gName: "fdffd",
-  //     email: "0777123456",
-  //     tp: null,
-  //     text: "fdfdfdfdfdddf",
-  //     replies: [],
-  //   },
-  //   {
-  //     pRating: 3,
-  //     oRating: 4,
-  //     _id: {
-  //       $oid: "603cc2614f5f9b3ce01a340e",
-  //     },
-  //     gId: "222",
-  //     gName: "fdffd",
-  //     email: "0777123456",
-  //     tp: null,
-  //     text: "fdfdfdfdfdddf",
-  //     replies: [],
-  //   },
-  //   {
-  //     pRating: 3,
-  //     oRating: 3,
-  //     _id: {
-  //       $oid: "603cc26a4f5f9b3ce01a340f",
-  //     },
-  //     gId: "",
-  //     gName: "",
-  //     email: "",
-  //     tp: null,
-  //     text: "",
-  //     replies: [],
-  //   },
-  // ],
-  // createdAt: {
-  //   $date: "2021-02-28T07:14:39.175Z",
-  // },
-  // updatedAt: {
-  //   $date: "2021-03-01T10:31:06.865Z",
-  // },
-  // __v: 0,
-  // }
   const [loding, setLoading] = useState(true);
   // const [guestId, setGuestId] = useState("");
   // const [guestName, setGuestName] = useState("");
@@ -173,11 +90,7 @@ const PropertyDetails = (props) => {
     }
   }, []);
 
-  // const AfterDeleteHandler = (data) => {
-  //   useEffect(() => {
-  //     setData(data);
-  //   }, [])
-  // }
+  
 
   const commentSection = () => {
     if (data && data.comments && data.comments.length > 0) {
@@ -210,14 +123,12 @@ const PropertyDetails = (props) => {
           setRatings(response.data.ratings);
         }
 
-        // setLoading(false);
+        
       })
       .catch((err) => console.log(err));
   };
 
-  // const addCommentSection = () => (
-
-  // );
+  
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -227,8 +138,7 @@ const PropertyDetails = (props) => {
     const comment = {
       gId: guestId,
       gName: guestName,
-      // email: email,
-      // tp: tpNo,
+      
       pRating: pRating,
       oRating: oRating,
       comment: commentText,
@@ -240,10 +150,7 @@ const PropertyDetails = (props) => {
       .post("/api/comment/", comment)
       .then((response) => {
         console.log(response);
-        // setGuestId("");
-        // setGuestName("");
-        // setEmail("");
-        // setTpNo("");
+        
         setPRating(3);
         setORating(3);
         setCommentText("");
@@ -285,10 +192,10 @@ const PropertyDetails = (props) => {
           </Card>
         </Grid>
         <Details pRate={ratings.p_rating} oRate={ratings.o_rating} />
-        <div style={{ padding: 14 }} className="App">
+        <div style={{ padding: 1 }} className="App">
           <h1>Comments</h1>
 
-          <Paper style={{ padding: "40px 20px", width: "1360px" }}>
+          <Paper style={{ padding: "00px 00px", width: "1000px" }}>
             {/* comment section */}
             <div> {commentSection()}</div>
             <div style={{ backgroundColor: "#EDF7F6", padding: "10px" }}>

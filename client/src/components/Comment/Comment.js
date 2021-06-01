@@ -154,7 +154,7 @@ const Comment = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+      <Divider variant="" style={{ margin: "30px 0" }} />
 
       {/* <Grid container wrap="nowrap" spacing={2} direction="column">
           <Grid item xs={12}>

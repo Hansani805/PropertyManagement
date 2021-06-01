@@ -5,9 +5,9 @@ import Rating from "@material-ui/lab/Rating";
 
 const Details = ({ pRate, oRate, ...rest }) => {
   return (
-    <div style={{ padding: 14 }} className="App">
+    <div style={{ padding: 0 }} className="App">
       <h1>Details</h1>
-      <Paper style={{ padding: "25px 20px", width: "1360px" }}>
+      <Paper style={{ padding: "20px 20px", width: "1000px" }}>
         <Grid container wrap="nowrap" spacing={2} direction="column">
           {/* <Grid item container wrap="nowrap" spacing={2}> */}
           <Grid item xs={12}>
