@@ -17,7 +17,7 @@ const PaymentSchema = new Schema({
 
     },
     phone:{
-        type:String
+        type:Number
 
     },
     city:{
@@ -48,6 +48,6 @@ const PaymentSchema = new Schema({
 
 
 });
-{ timestamps: true }
+
 
 module.exports = mongoose.model('Payment',PaymentSchema)

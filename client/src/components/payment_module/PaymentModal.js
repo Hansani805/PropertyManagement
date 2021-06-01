@@ -5,16 +5,19 @@ import isEmail from "validator/lib/isEmail";
 import axios from '../mainpages/utils/axios'//"./components/mainpages/utils/axios.js";
 //import DetailProduct from '../mainpages/detailProduct/DetailProduct';
 
-const PaymentModal = () => {
+const PaymentModal = (props) => {
+ const {state}=props.location 
+ console.log(state)
+
   const [paymentData, setPaymentData] = useState({
     sandbox: true,
     merchant_id: '1216780',
     return_url: 'http://localhost:3000/return',
     cancel_url: 'http://localhost:3000/cancel',
     notify_url: 'http://localhost:3000/notify',
-    order_id: '',
-    items: '',
-    amount: '',
+    order_id: state._id,
+    items: state.title,
+    amount: state.price,
     currency: "LKR",
     first_name: '',
     last_name: '',
@@ -26,6 +29,7 @@ const PaymentModal = () => {
 
   })
   const [error, setError] = useState('');
+  console.log(paymentData)
 
   const onChangeHandler = (e) => {
     setPaymentData({
@@ -40,7 +44,7 @@ const PaymentModal = () => {
     console.log("Payment completed. OrderID:" + orderId);
     
     axios
-        .post('/api/payment', {
+        .post('api/payment', {
           first_name:paymentData.first_name,
           last_name:paymentData.last_name,
           address:paymentData.address,
@@ -57,8 +61,7 @@ const PaymentModal = () => {
         .then((response) => {
           console.log("response called")
           console.log(response);
-          // setReplyData(prev => [...prev, {user: "W008-Aruna Perera", text: reply}]);
-          // setReplyState(false);
+         
 
         })
         .catch((err) => console.log(err));
@@ -280,7 +283,8 @@ const PaymentModal = () => {
               type="orderid"
               placeholder="Order ID"
               id="orderid" name="order_id"
-              value={paymentData.orderid}
+              value={paymentData.order_id}
+              disabled
               onChange={onChangeHandler}
 
             />
@@ -299,7 +303,8 @@ const PaymentModal = () => {
               type="propertyitem"
               placeholder="Property Item"
               id="propertyitem" name="items"
-              value={paymentData.propertyitem}
+              value={paymentData.items}
+              disabled
               onChange={onChangeHandler}
 
             />
@@ -335,7 +340,8 @@ const PaymentModal = () => {
               type="amount"
               placeholder="Amount"
               id="amount" name="amount"
-              value={paymentData.amout}
+              value={paymentData.amount}
+              disabled
               onChange={onChangeHandler}
 
             />

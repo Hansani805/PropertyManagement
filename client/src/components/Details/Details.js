@@ -62,7 +62,9 @@ const Details = ({ pRate, oRate, ...rest }) => {
                   <Rating name="owner" size="medium" value={0} /> {oRate[0]}
                 </li>
               </ul>
-              <button>payment</button>
+              {/* <button>payment</button> */}
+
+              
             </Grid>
           </Grid>
         </Grid>

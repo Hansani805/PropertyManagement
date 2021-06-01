@@ -59,7 +59,7 @@ function Header() {
             </div>
 
             <ul style={styleMenu}>
-                <li><Link to="/">{isAdmin ? 'Products' : 'Reservation'}</Link></li>
+                <li><Link to="/">{isAdmin ? 'Products' : 'Accomadation'}</Link></li>
 
                 {isAdmin && adminRouter()}
 
@@ -73,15 +73,7 @@ function Header() {
 
             </ul>
 
-            {
-                isAdmin ? '' 
-                :<div className="chat-icon">
-                    {/* <span>{cart.length}</span> */}
-                    <Link to="/">
-                        <img src={Chat} alt="" width="30" />
-                    </Link>
-                </div>
-            }
+           
             
         </header>
     )

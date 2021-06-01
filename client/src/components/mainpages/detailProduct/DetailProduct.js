@@ -20,38 +20,37 @@ function DetailProduct() {
 
   if (detailProduct.length === 0) return null;
 
-  return (
-    <>
-      <div className="detail">
-        <img src={detailProduct.images.url} alt="" />
-        <div className="box-detail">
-          <div className="row">
-            <h2>{detailProduct.title}</h2>
-            <h6>{detailProduct.product_id}</h6>
-          </div>
+  
 
-          <span>Rs. {detailProduct.price}</span>
-          <p>{detailProduct.description}</p>
-          <p>{detailProduct.content}</p>
-          <p>Reserved: {detailProduct.sold}</p>
-          <Link
-            to="/paymentmodal"
-            className="cart"
-            // onClick={() => addCart(detailProduct)}
-          >
-            Book Now
-          </Link>
-          <br></br>
-          {/* < div className="rating"> */}
-          {/* <Link
-            to="/feedback"
-            className="rating"
-            params={{ product_id: params.id }}
-          >
-            Rate Us
-          </Link> */}
+    return (
+        <>
+            <div className="detail">
+                <img src={detailProduct.images.url} alt="" />
+                <div className="box-detail">
+                    <div className="row">
+                        <h2>{detailProduct.title}</h2>
+                        <h6>{detailProduct.product_id}</h6>
+                    </div>
+                    
+                    <span>Rs. {detailProduct.price}</span>
+                    <p>{detailProduct.description}</p>
+                    <p>{detailProduct.content}</p>
+                    <p>Reserved: {detailProduct.sold}</p>
+                    {detailProduct.sold === 0 ? 
 
-          <Link
+                    <Link to={{pathname:"/paymentmodal",state:detailProduct}} className="cart" 
+                    
+                    // onClick={() => addCart(detailProduct)}
+
+                    >
+                        Book Now
+                    
+                    </Link>
+                    : <p className="cart">Booked</p>}
+
+                    <br></br>
+                    {/* < div className="rating"> */}
+                    <Link
             to={{
               pathname: "/feedback",
               state: {
@@ -60,17 +59,16 @@ function DetailProduct() {
             }}
             className="rating"
           >
-            Rate Us
+           Rates/Reviews
           </Link>
+                   
 
-          {/* </div> */}
-          <div className="chatspace">
-            <Link to="/chat" className="chat">
-              Chat Now
-            </Link>
-          </div>
-        </div>
-      </div>
+                    {/* </div> */}
+                    
+                    
+                </div>
+               
+            </div>
 
       <div>
         <h2>Related Accommodations</h2>
