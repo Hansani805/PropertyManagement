@@ -8,27 +8,63 @@ import TextField from "@material-ui/core/TextField";
 
 import axios from "../../components/mainpages/utils/axios";
 
-
-
 const Comment = (props) => {
-  const { user, rate, replies, text, pId, commentId, dat } = props;
-  const [replyData, setReplyData] = useState(replies);
-  const [reply, setReply] = useState('');
+  const { user, rate, text, pId, commentId, dat } = props;
+  const [replyData, setReplyData] = useState([]);
+  const [reply, setReply] = useState("");
   const [replyState, setReplyState] = useState(false);
-  
-  useEffect(() => {
-    if(replyState)
-      axios
-        .post('/api/comment/reply', {pId: pId, commentId: commentId, reply: {user: "W008-Aruna Perera", text: reply}})
-        .then((response) => {
-          console.log(response);
-          setReplyData(prev => [...prev, {user: "W008-Aruna Perera", text: reply}]);
-          setReplyState(false);
-        })
-        .catch((err) => console.log(err));
 
-      // setLoading(false);
-  }, [replyState, commentId, pId, reply]);
+  const saveReply = async () => {
+    axios
+      .post("/api/reply", {
+        commentId,
+        name: "W008-Aruna Perera",
+        reply: reply,
+      })
+      .then((res) => {
+        console.log(res);
+        setReply("");
+        getReplies();
+      });
+  };
+
+  const getReplies = async () => {
+    console.log("*******************************");
+    console.log(commentId);
+    axios.get(`/api/reply/${commentId}`).then((res) => {
+      console.log(res);
+      if (res && res.data && res.data.replies) {
+        console.log("-----++++++++++++----------");
+
+        setReplyData(res.data.replies);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getReplies();
+  }, [commentId]);
+
+  // useEffect(() => {
+  //   if (replyState)
+  //     axios
+  //       .put("/api/comment", {
+  //         _id: commentId,
+  //         user: "W008-Aruna Perera",
+  //         reply,
+  //       })
+  //       .then((response) => {
+  //         console.log(response);
+  //         // setReplyData((prev) => [
+  //         //   ...prev,
+  //         //   { user: "W008-Aruna Perera", text: reply },
+  //         // ]);
+  //         setReplyState(false);
+  //       })
+  //       .catch((err) => console.log(err));
+
+  //   // setLoading(false);
+  // }, [replyState, commentId, pId, reply]);
 
   return (
     <>
@@ -62,9 +98,9 @@ const Comment = (props) => {
                 <ul>
                   {replyData.map((reply) => (
                     <li key={Math.random()}>
-                      {reply.user}
+                      {reply.name}
                       <br></br>
-                      {reply.text}
+                      {reply.reply}
                     </li>
                   ))}
                 </ul>
@@ -87,11 +123,7 @@ const Comment = (props) => {
             />
             <Grid justify="space-between" item container xs>
               <Grid item>
-                <Button
-                  onClick={() => setReplyState(true)}
-                  color="primary"
-                  variant="contained"
-                >
+                <Button onClick={saveReply} color="primary" variant="contained">
                   Reply
                 </Button>
               </Grid>
@@ -108,7 +140,7 @@ const Comment = (props) => {
                           .get(`/api/property/${pId}`)
                           .then((response) => {
                             console.log(response);
-                            dat(prev => !prev);
+                            dat((prev) => !prev);
                           })
                           .catch((err) => console.log(err));
                       })
